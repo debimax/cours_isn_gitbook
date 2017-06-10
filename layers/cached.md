@@ -64,11 +64,11 @@ Le projet [OpenStreetMap (OSM)](http://www.openstreetmap.org/) est un effort  po
 
 Revoyons la définition d'une vue dans la carte:
 
-```js
-  view: new ol.View({
-    center: ol.proj.fromLonLat([126.97, 37.56]),
-    zoom: 9
-  })
+```python
+  'view':  ol.View.new({
+    'center': ol.proj.fromLonLat([5.7626, 45.1734]),
+    'zoom': 9
+  }),
 ```
 
 La donnée géospatiale peut venir dans n'importe quel système de coordonnées de référence. Un jeu de donnée peut utiliser des coordonnées géographiques (longitude et latitude) en degrés, et un autre peut avoir des coordonnées dans une projection locale avec des unités en mètres. Une discussion complète sur les systèmes de référence de coordonnées va bien au delà du périmètre de ce module mais il est néanmoins important de comprendre le concept de base.
@@ -93,7 +93,7 @@ Ensuite, dans le code de votre application, vous pouvez enregistrer cette projec
 ```js
   // This creates a projection object for the EPSG:21781 projection
   // and sets a "validity extent" in that projection object.
-  var projection = ol.proj.get('EPSG:21781');
+  projection = ol.proj.get('EPSG:21781')
   projection.setExtent([485869.5728, 76443.1884, 837076.5648, 299941.7864]);
 ```
 
@@ -125,10 +125,10 @@ Un traitement des `controls` de la carte est en dehors du périmètre de ce modu
 
 Par défaut, `ol.control.Attribution` ajoute un bouton `i` (information) qui peut être pressé pour afficher réellement l'information d'attribution. Pour se conformer aux [termes d'utilisation d'OpenStreetMap](http://wiki.openstreetmap.org/wiki/FR:Questions_fr%C3%A9quentes_l%C3%A9gales), et toujours afficher l'information d'attribution d'OpenStreetMap, ce qui suit est utilisé dans les options de l'objet passé au constructeur `ol.Map`:
 
-```js
-  controls: ol.control.defaults({
-    attributionOptions: {
-      collapsible: false
+```python
+  'controls': ol.control.defaults({
+    'attributionOptions': {
+      'collapsible': 'false'
     }
   })
 ```
