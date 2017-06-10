@@ -14,7 +14,7 @@ Jetons un oeil à un exemple pleinement fonctionnel d'une carte OpenLayers.
   <script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
 <link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
   <style>
-    .map {
+    .carte {
     height: 400px;
     width: 100%;
     }
@@ -22,8 +22,7 @@ Jetons un oeil à un exemple pleinement fonctionnel d'une carte OpenLayers.
 </head>
 <body onload="brython(1)">
 
-<div id="map" class ="map"> </div>
-
+<div id="map" class ="carte"> </div>
 
 <script type="text/python">
 from browser import window
