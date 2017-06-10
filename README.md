@@ -1,20 +1,6 @@
-# Workshop OpenLayers
+# Workshop OpenLayers+brython
 
-Bienvenue au **Workshop OpenLayers**. Ce workshop est conçu pour vous donner une vue d'ensemble d'OpenLayers en tant que solution de cartographie en ligne.
-
-## Configuration
-
-Ces instructions assument que vous avez récupéré l'archive `openlayers-workshop-fr.zip` depuis la [dernière version du workshop](https://github.com/openlayers/workshop/releases).  En plus, vous devez avoir [Node](https://nodejs.org/) installé pour lancer une serveur de développement pour la bibliothèque OpenLayers.
-
-Après extraction du fichier zip, allez dans le répertoire `openlayers-workshop-fr` et installez quelques dépendances additionnelles:
-
-    npm install
-
-Maintenant, vous êtes prêts à démarrer le serveur pour le workshop.  Il sert la documentation du workshop en plus de fournir un chargeur pour le debug pour la bibliothèque OpenLayers.
-
-    npm start
-
-Cela va démarrer un serveur de développement où vous pourrez lire la documentation du workshop et avancez sur les exercices: {{ book.workshopUrl }}.
+Mon cours est une version du [**Workshop OpenLayers fr**](https://openlayers.org/workshop/fr/index.html) mais les scripts sont adaptés pour l'utilisation de brython.
 
 ## Vue d'ensemble
 
