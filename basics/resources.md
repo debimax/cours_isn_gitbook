@@ -10,6 +10,15 @@ Les nouveaux utilisateurs trouveront probablement que plonger dans les exemples 
 
 Les examples sont écrits en javascript,  il faudra soit les transformer pour brython, soit laisser le code en javascript.
 
+## Convertir  un exemple openlayer de javascript pour brython
+
+* Enlever `var`
+* `new` se met à la fin
+  Par exemple on transforme **`var map = new ol.Map({`** en  **`map = ol.Map.new({`**  
+* On met en type  string  pour les dictionnaires.
+  Par exemple  **`target: 'map',`**  est remplacé par   **`'target': 'map',`** 
+* Enlever ` `**`getElemenById()`**` `remplacer  **` true `** par **` 'true' `**
+
 ## Explorer la documentation
 
 Pour plus d'informations sur des sujets spécifiques, naviguer la collection grandissante de documentation pour OpenLayers.
