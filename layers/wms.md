@@ -12,42 +12,46 @@ Jetez un oeil au code suivant:
 
 ```html
 <!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="/ol.css" type="text/css">
-    <style>
-      #map {
-        height: 256px;
-        width: 512px;
-      }
-    </style>
-    <script src="/loader.js" type="text/javascript"></script>
-    <title>OpenLayers example</title>
-  </head>
-  <body>
-    <h1>My Map</h1>
-    <div id="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            title: 'Global Imagery',
-            source: new ol.source.TileWMS({
-              url: 'https://ahocevar.com/geoserver/wms',
-              params: {LAYERS: 'nasa:bluemarble', TILED: true}
-            })
-          })
-        ],
-        view: new ol.View({
-          projection: 'EPSG:4326',
-          center: [0, 0],
-          zoom: 0,
-          maxResolution: 0.703125
-        })
-      });
-    </script>
-  </body>
+<html>
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>
+  <script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
+  <style>
+    #map {
+    height: 400px;
+    width: 100%;
+    }
+  </style>
+</head>
+<body onload="brython(1)">
+<div id="map" class ="map"> </div>
+
+<script type="text/python">
+from browser import window
+ol = window.ol
+
+map =  ol.Map.new({
+  'target': 'map',
+  'layers': [
+    ol.layer.Tile.new({
+      'title': 'Global Imagery',
+      'source':  ol.source.TileWMS.new({
+        'url': 'https://ahocevar.com/geoserver/wms',
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+      })
+    })
+  ],
+  'view':  ol.View.new({
+    'projection': 'EPSG:4326',
+    'center': [5.7626, 45.1734],
+    'zoom': 4,
+    'maxResolution': 0.703125
+  })
+})
+</script>
+</body>
 </html>
 ```
 
@@ -69,18 +73,18 @@ Dans OpenLayers, il y a une séparation entre les couches et les sources alors q
 ## Le constructeur `ol.source.TileWMS`
 
 Le constructeur `ol.source.TileWMS` est un argument unique qui est définit par: http://openlayers.org/en/master/apidoc/ol.source.TileWMS.html.
-L'url est la `online resource` du service WMS, et `params` est un objet litéral avec les noms des paramètres et leurs valeurs. Seul le paramètre `LAYERS` est requis. Dans cet exemple, nous ajoutons `TILED: true`, une extension spécifique à GeoServer pour une meilleure mise en cache des couches WMS en mosaïque.
+L'url est la `online resource` du service WMS, et `params` est un objet litéral avec les noms des paramètres et leurs valeurs. Seul le paramètre `'LAYERS'` est requis. Dans cet exemple, nous ajoutons `'TILED': 'true'`, une extension spécifique à GeoServer pour une meilleure mise en cache des couches WMS en mosaïque.
 
-```js
-  layers: [
-    new ol.layer.Tile({
-      title: 'Global Imagery',
-      source: new ol.source.TileWMS({
-        url: 'https://ahocevar.com/geoserver/wms',
-        params: {LAYERS: 'nasa:bluemarble', TILED: true}
-      })
-    })
-  ]
+```python
+'layers': [
+ ol.layer.Tile.new({
+'title': 'Global Imagery',
+'source':  ol.source.TileWMS.new({
+'url': 'https://ahocevar.com/geoserver/wms',
+'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+})
+})
+],
 ```
 
 ### Tâches
@@ -89,14 +93,16 @@ L'url est la `online resource` du service WMS, et `params` est un objet litéral
 
   Votre version mise à jour du constructeur `ol.layer.Tile` devrait ressembler à ci-dessous:
 
-  ```js
-    new ol.layer.Tile({
-      title: 'Global Imagery',
-      source: new ol.source.TileWMS({
-        url: 'https://ahocevar.com/geoserver/wms',
-        params: {LAYERS: 'ne:NE1_HR_LC_SR_W_DR', TILED: true}
-      })
+  ```python
+'layers': [
+  ol.layer.Tile.new({
+    'title': 'Global Imagery',
+    'source':  ol.source.TileWMS.new({
+      'url': 'https://ahocevar.com/geoserver/wms',
+      'params': {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': 'true'}
     })
+  })
+],
   ```
 
 2. Changez votre couche et votre source pour avoir une image unique plutôt que des tuiles. Regardez aux pages de la documentation de l'API pour avoir des indices: http://openlayers.org/en/master/apidoc/ol.layer.Image.html et http://openlayers.org/en/master/apidoc/ol.source.ImageWMS.html. Utilisez l'onglet `Réseau` des outils de développement de votre navigateur pour vous assurer qu'une seule image est demandée et pas seulement des tuiles de 256x256 pixels.
