@@ -7,43 +7,49 @@ Dans OpenLayers, une carte est une collection de couches avec plusieurs `interac
 Jetons un oeil à un exemple pleinement fonctionnel d'une carte OpenLayers.
 
 ```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="/ol.css" type="text/css">
-    <style>
-      #map {
-        height: 256px;
-        width: 512px;
-      }
-    </style>
-    <title>OpenLayers example</title>
-    <script src="/loader.js" type="text/javascript"></script>
-  </head>
-  <body>
-    <h1>My Map</h1>
-    <div id="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            title: 'Global Imagery',
-            source: new ol.source.TileWMS({
-              url: 'https://ahocevar.com/geoserver/wms',
-              params: {LAYERS: 'nasa:bluemarble', TILED: true}
-            })
-          })
-        ],
-        view: new ol.View({
-          projection: 'EPSG:4326',
-          center: [0, 0],
-          zoom: 0,
-          maxResolution: 0.703125
-        })
-      });
-    </script>
-  </body>
+<html>
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>
+  <script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
+  <style>
+    .map {
+    height: 400px;
+    width: 100%;
+    }
+  </style>
+</head>
+<body onload="brython(1)">
+
+<div id="map" class ="map"> </div>
+
+
+<script type="text/python">
+from browser import window
+ol = window.ol
+
+map =  ol.Map.new({
+'target': 'map',
+'layers': [
+ ol.layer.Tile.new({
+'title': 'Global Imagery',
+'source':  ol.source.TileWMS.new({
+'url': 'https://ahocevar.com/geoserver/wms',
+'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+})
+})
+],
+'view':  ol.View.new({
+'projection': 'EPSG:4326',
+'center': [5.7626, 45.1734],
+'zoom': 8,
+'maxResolution': 0.703125
+})
+})
+</script>
+
+</body>
 </html>
 ```
 
