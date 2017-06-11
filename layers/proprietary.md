@@ -12,10 +12,10 @@ Ajoutons une couche Bing.
 
 1. Dans votre fichier `map.html`, trouvez où la source OSM (OpenStreetMap) est configurée et changez-la en `ol.source.BingMaps`
 
-  ```js
-    source: new ol.source.BingMaps({
-      imagerySet: 'Road',
-      key: '<Your Bing Maps Key Here>'
+  ```python
+    'source': new ol.source.BingMaps({
+      'imagerySet': 'Road',
+      'key': '<Your Bing Maps Key Here>'
     })
   ```
   *Note* - L'API de tuiles de Bing nécessite de que vous vous enregistriez pour avoir un clé d'API à utiliser pour votre application de cartographie en ligne.  L'exemple ici utilise une clé d'API que vous ne devriez pas utiliser en production.  pour utiliser la couche Bing en production, enregistrez-vous pour une clé d'API sur https://www.bingmapsportal.com.
