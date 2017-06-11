@@ -35,7 +35,7 @@ map =  ol.Map.new({
 'title': 'Global Imagery',
 'source':  ol.source.TileWMS.new({
 'url': 'https://ahocevar.com/geoserver/wms',
-'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
 })
 })
 ],

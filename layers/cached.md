@@ -18,41 +18,44 @@ Le projet [OpenStreetMap (OSM)](http://www.openstreetmap.org/) est un effort  po
 
 1. Ouvrez le fichier `map.html` de la [section précédente](wms.md) dans votre éditeur de texte et changez le code d'initialisation de la carte pour qu'il ressemble à celui qui suit:
 
-  ```html
-    <script>
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            source: new ol.source.OSM()
-          })
-        ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat([126.97, 37.56]),
-          zoom: 9
-        }),
-        controls: ol.control.defaults({
-          attributionOptions: {
-            collapsible: false
-          }
-        })
-      });
-    </script>
+```python
+<script type="text/python">
+from browser import window
+ol = window.ol
+
+map = ol.Map.new({
+  'target': 'map',
+  'layers': [
+    ol.layer.Tile.new({
+      'source':  ol.source.OSM.new()
+    })
+  ],
+  'view': ol.View.new({
+    'center': ol.proj.fromLonLat([5.7626, 45.1734]),
+    'zoom': 9,
+  }),
+  'controls': ol.control.defaults({
+    'attributionOptions': {
+      'collapsible': False
+    }
+  })
+})
+</script>
   ```
 
 1. Dans le bloc `<head>` du même document, ajoutez quelques déclarations de style pour l'attribution de la couche.
 
-  ```html
-    <style>
-        #map {
-            width: 512px;
-            height: 256px;
-        }
-        .ol-attribution a {
-            color: black;
-        }
-    </style>
-  ```
+```html
+<style>
+    #map {
+        width: 512px;
+        height: 256px;
+    }
+    .ol-attribution a {
+        color: black;
+    }
+</style>
+```
 
 1. Sauvez vos changements et rafraichissez la page dans votre navigateur: {{ book.workshopUrl }}/map.html
 
@@ -106,7 +109,7 @@ Par défaut, `ol.control.Attribution` ajoute un bouton `i` (information) qui peu
 ```python
   'controls': ol.control.defaults({
     'attributionOptions': {
-      'collapsible': 'false'
+      'collapsible': False
     }
   })
 ```

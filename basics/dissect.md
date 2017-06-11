@@ -50,7 +50,7 @@ map =  ol.Map.new({
       'title': 'Global Imagery',
       'source':  ol.source.TileWMS.new({
         'url': 'https://ahocevar.com/geoserver/wms',
-        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
       })
     })
  ],
@@ -62,10 +62,9 @@ map =  ol.Map.new({
   })
 })
 </script>
-
 ```
 
-L'ordre de ces étapes est important. Avant que notre script personnalisé puisse être exécuté, la bibliothèque OpenLayers doit impérativement être chargée. Dans notre exemple, la bibliothèque OpenLayers est chargée dans le bloc `<head>` de notre document avec &lt;script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"&gt;&lt;/script&gt;.
+L'ordre de ces étapes est important. Avant que notre script personnalisé puisse être exécuté, la bibliothèque OpenLayers doit impérativement être chargée. Dans notre exemple, la bibliothèque OpenLayers est chargée dans le bloc `<head>` de notre document avec &lt;script type="text/javascript" src="[https://openlayers.org/en/v4.1.1/build/ol.js"&gt;&lt;/script&gt;](https://openlayers.org/en/v4.1.1/build/ol.js"></script&gt).
 
 De manière similaire, notre code d'initialisation de la carte \(ci-dessus\) ne peut être exécuté avant que l'élément du document qui sert de fenêtre d'affichage de carte, dans ce cas `<div id="map" class="carte"></div>`, ne soit chargé. En incluant, le code d'initialisation à la fin du corps de `<body>`, nous nous assurons que la bibliothèque est chargée et que le container de la fenêtre d'affichage de carte est prêt avant de générer notre carte.
 
@@ -79,13 +78,13 @@ Nous passons `"map"` comme valeur de chaîne de caractères pour le paramètre `
 
 La configuration de couches créé une couche qui doit être affichée dans notre carte:
 
-```js
+```py
   'layers': [
     ol.layer.Tile.new({
       'title': 'Global Imagery',
       'source':  ol.source.TileWMS.new({
         'url': 'https://ahocevar.com/geoserver/wms',
-        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
       })
     })
  ],
@@ -95,14 +94,13 @@ Ne vous inquiétez pas de la syntaxe ici si cette partie est nouvelle pour vous.
 
 L'étape finale est de définir la vue. Nous spécifions une projection, un centre et un niveau de zoom. Nous spécifions aussi une `maxResolution` pour nous assurer que nous ne demandons pas des `bounding boxes` que GeoWebCache ne peut pas gérer.
 
-```js
+```py
 'view':  ol.View.new({
   'projection': 'EPSG:4326',
   'center': [5.7626, 45.1734],
   'zoom': 8,
   'maxResolution': 0.703125
 })
-
 ```
 
 Vous avez disséqué avec succès votre première carte! Maintenant, [apprenons en plus](./resources.md) sur le développement avec OpenLayers.

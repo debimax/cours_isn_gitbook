@@ -38,7 +38,7 @@ map =  ol.Map.new({
       'title': 'Global Imagery',
       'source':  ol.source.TileWMS.new({
         'url': 'https://ahocevar.com/geoserver/wms',
-        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
       })
     })
   ],
@@ -80,7 +80,7 @@ L'url est la `online resource` du service WMS, et `params` est un objet litéral
 'title': 'Global Imagery',
 'source':  ol.source.TileWMS.new({
 'url': 'https://ahocevar.com/geoserver/wms',
-'params': {'LAYERS': 'nasa:bluemarble', 'TILED': 'true'}
+'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
 })
 })
 ],
@@ -98,7 +98,7 @@ L'url est la `online resource` du service WMS, et `params` est un objet litéral
     'title': 'Global Imagery',
     'source':  ol.source.TileWMS.new({
       'url': 'https://ahocevar.com/geoserver/wms',
-      'params': {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': 'true'}
+      'params': {'LAYERS': 'ne:NE1_HR_LC_SR_W_DR', 'TILED': True}
     })
   })
 ],
