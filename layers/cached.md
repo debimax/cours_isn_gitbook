@@ -77,34 +77,12 @@ OpenLayers doit connaître le système de coordonnées de votre donnée. En inte
 
 Les tuiles OpenStreetMap que nous utilisons sont dans une projection Mercator. Pour cette raison, nous devons définir initialement le centre en utilisant des coordonnées en Mercator. Comme il est relativement simple de trouver les coordonnées pour un point d'intérêt en coordonnées géographiques, nous utilisons la fonction `ol.proj.fromLonLat` pour transformer les coordonnées géographiques (`'EPSG:4326'`) en coordonnées Mercator (`'EPSG:3857'`).
 
-### Projections alternatives
-
-OpenLayers inclut les transformation entre les systèmes de références de coordonnées géographiques (`'EPSG:4326'`) et Web Mercator (`'EPSG:3857'`).  Pour cette raison, nous pouvons utiliser la fonction `ol.proj.fromLonLat` ci-dessus sans aucun travail supplémentaire.  Si vous voulez travailler avec des données dans une projection différente, vous devez inclure des informations additionnelles avant d'utiliser les fonctions `ol.proj.*`.
-
-Par exemple, si vous voulez travailler avec de la donnée dans le système de référence de coordonnées `'EPSG:21781'`, vous allez devoir inclure les deux tags `script` dans votre page:
-
-```html
-  <script src="http://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js" type="text/javascript"></script>
-  <script src="http://epsg.io/21781-1753.js" type="text/javascript"></script>
-```
-
-Ensuite, dans le code de votre application, vous pouvez enregistrer cette projection et définir la validité de son étéendue comme ci-dessous:
-
-```js
-  // This creates a projection object for the EPSG:21781 projection
-  // and sets a "validity extent" in that projection object.
-  projection = ol.proj.get('EPSG:21781')
-  projection.setExtent([485869.5728, 76443.1884, 837076.5648, 299941.7864]);
-```
-
-L'information d'étendue `extent` peut être retrouvée sur http://epsg.io/, en utilisant le code EPSG.
-
 ### Création de couche
 
-```js
-  layers: [
-    new ol.layer.Tile({
-      source: new ol.source.OSM()
+```python
+  'layers': [
+      ol.layer.Tile.new({
+      'source': new ol.source.OSM()
     })
   ],
 ```

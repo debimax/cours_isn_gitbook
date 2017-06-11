@@ -6,7 +6,7 @@ Dans cette section, nous allons repartir  de l'exemple développé dans la [sect
 
 ## Bing!
 
-Ajoutons un couche Bing.
+Ajoutons une couche Bing.
 
 ### Tâches
 

@@ -11,7 +11,6 @@ Nous allons commencer avec un exemple complet de carte et modifier les couches p
 Jetez un oeil au code suivant:
 
 ```html
-<!doctype html>
 <html>
 <head>
 <meta charset="utf-8" />
