@@ -11,81 +11,102 @@ L'exemple ci-dessous utilise une `ol.layer.Image` avec une `ol.source.ImageVecto
 Revenons à l'exemple de couche vecteur pour avoir les données des tremblements de terre au dessus d'une carte du monde.
 
 ```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="/ol.css" type="text/css">
-    <style>
-      #map {
-        height: 256px;
-        width: 512px;
-      }
-    </style>
-    <title>OpenLayers example</title>
-    <script src="/loader.js" type="text/javascript"></script>
-  </head>
-  <body>
-    <h1>My Map</h1>
-    <div id="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            title: 'Global Imagery',
-            source: new ol.source.TileWMS({
-              url: 'https://ahocevar.com/geoserver/wms',
-              params: {LAYERS: 'nasa:bluemarble', TILED: true}
-            })
-          }),
-          new ol.layer.Vector({
-            title: 'Earthquakes',
-            source: new ol.source.Vector({
-              url: '/data/layers/7day-M2.5.json',
-              format: new ol.format.GeoJSON()
-            }),
-            style: new ol.style.Style({
-              image: new ol.style.Circle({
-                radius: 3,
-                fill: new ol.style.Fill({color: 'white'})
-              })
-            })
-          })
-        ],
-        view: new ol.View({
-          projection: 'EPSG:4326',
-          center: [0, 0],
-          zoom: 0,
-          maxResolution: 0.703125
-        })
-      });
-    </script>
-  </body>
-</html>
+<html>  
+<head>  
+<meta charset="utf-8" />  
+<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>  
+<script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>  
+<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">  
+<style>  
+#map {  
+height: 400px;  
+width: 100%;  
+}  
+.ol-attribution a {  
+color: black;  
+}  
+</style>  
+</head>  
+<body onload="brython(1)">  
+<div id="map" class ="map"> </div>  
+  
+<div id="info"></div>  
+  
+<script type="text/python">  
+from browser import window, document  
+ol = window.ol  
+  
+tremblement_terre =  ol.layer.Vector.new({  
+      'title': 'Earthquakes',  
+      'source':  ol.source.Vector.new({  
+        'url': 'https://raw.githubusercontent.com/boundlessgeo/ol3-workshop/master/src/data/layers/7day-M2.5.json',  
+        'format':  ol.format.GeoJSON.new()  
+      }),  
+      'style':  ol.style.Style.new({  
+        'image':  ol.style.Circle.new({  
+          'radius': 3,  
+          'fill':  ol.style.Fill.new({'color': 'white'})  
+        })  
+     })  
+  })  
+  
+map =  ol.Map.new({  
+  'target': 'map',  
+  'layers': [  
+    ol.layer.Tile.new({  
+      'title': 'Global Imagery',  
+      'source':  ol.source.TileWMS.new({  
+        'url': 'https://ahocevar.com/geoserver/wms',  
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}  
+      })  
+    }),  
+tremblements_terre  
+  ],  
+  'view':  ol.View.new({  
+    'projection': 'EPSG:4326',  
+    'center': [5.7626, 45.1734],  
+    'zoom': 1,  
+    'maxResolution': 0.703125  
+})  
+})  
+
+def get_feature(e):    
+    ft = map.forEachFeatureAtPixel(e.pixel, lambda feature, layer: feature)  
+    info_element = document['info']  
+    #info_element.text = ft.getKeys()  
+    try:  
+        info_element.text = ft.get('title')  
+    except:  
+        info_element.text = ""  
+  
+map.on('singleclick', get_feature)   
+</script>  
+</body>  
+</html>  
 ```
 
 ### Tâches
 
 1. Ouvrez `map.html` dans votre éditeur de texte et copiez dedans le contenu de l'exemple vecteur ci-dessus. Sauvez vos changements et confirmez que les choses fonctionnent bien dans votre navigateur: {{ book.workshopUrl }}/map.html
 
-1. Changez la couche vecteur en:
+1. Changez la couche vecteur tremblements_terre en:
 
-  ```js
-    new ol.layer.Image({
-      title: 'Earthquakes',
-      source: new ol.source.ImageVector({
-        source: new ol.source.Vector({
-          url: '/data/layers/7day-M2.5.json',
-          format: new ol.format.GeoJSON()
-        }),
-        style: new ol.style.Style({
-          image: new ol.style.Circle({
-          radius: 3,
-            fill: new ol.style.Fill({color: 'white'})
-          })
-        })
+  ```python
+tremblements_terre =  ol.layer.Image.new({
+  'title': 'Earthquakes',
+  'source':  ol.source.ImageVector.new({
+    'source':  ol.source.Vector.new({
+      'url': '7day-M2.5.json',
+      'format':  ol.format.GeoJSON.new()
+    }),
+    'style':  ol.style.Style.new({
+      'image':  ol.style.Circle.new({
+        'radius': 3,
+        'fill':  ol.style.Fill.new({'color': 'white'})
       })
     })
+  })
+})
   ```
 
 1. Rechargez {{ book.workshopUrl }}/map.html dans votre navigateur
@@ -94,24 +115,24 @@ Revenons à l'exemple de couche vecteur pour avoir les données des tremblements
 
 ### Examen de détails
 
-Let's examine the layer creation to get an idea of what is going on.
+Examinons la création de la couche pour avoir une idée de ce qui se passe.
 
-```js
-  new ol.layer.Image({
-    title: 'Earthquakes',
-    source: new ol.source.ImageVector({
-      source: new ol.source.Vector({
-        url: '/data/layers/7day-M2.5.json',
-        format: new ol.format.GeoJSON()
-      }),
-      style: new ol.style.Style({
-        image: new ol.style.Circle({
-        radius: 3,
-          fill: new ol.style.Fill({color: 'white'})
-        })
+```python
+tremblements_terre = ol.layer.Image.new({
+  'title': 'Earthquakes',
+  'source': ol.source.ImageVector.new({
+    'source': ol.source.Vector.new({
+      'url': '7day-M2.5.json',
+      'format': ol.format.GeoJSON.new()
+    }),
+    'style': ol.style.Style.new({
+      'image': ol.style.Circle.new({
+        'radius': 3,
+        'fill': ol.style.Fill.new({'color': 'white'})
       })
     })
   })
+})
 ```
 
 Nous utilisons une `ol.layer.Image` au lieu d'une `ol.layer.Vector`. Cependant, nous pouvons toujours utiliser les données vecteur ici via `ol.source.ImageVector` qui est connectée à notre source originale vecteur `ol.source.Vector`. Le style est fourni comme une configuration de `ol.source.ImageVector` et pas sur la couche.
