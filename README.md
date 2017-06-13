@@ -1,4 +1,4 @@
-# Workshop OpenLayers+brython 
+# Workshop OpenLayers+brython
 
 Mon cours est une version du [**Workshop OpenLayers fr**](https://openlayers.org/workshop/fr/index.html) mais les scripts sont adaptés pour l'utilisation de brython.
 
