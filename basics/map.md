@@ -29,22 +29,22 @@ from browser import window
 ol = window.ol
 
 map =  ol.Map.new({
-'target': 'map',
-'layers': [
- ol.layer.Tile.new({
-'title': 'Global Imagery',
-'source':  ol.source.TileWMS.new({
-'url': 'https://ahocevar.com/geoserver/wms',
-'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
-})
-})
-],
-'view':  ol.View.new({
-'projection': 'EPSG:4326',
-'center': [5.7626, 45.1734],
-'zoom': 8,
-'maxResolution': 0.703125
-})
+  'target': 'map',
+  'layers': [
+    ol.layer.Tile.new({
+      'title': 'Global Imagery',
+      'source':  ol.source.TileWMS.new({
+        'url': 'https://ahocevar.com/geoserver/wms',
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
+      })
+    })
+  ],
+  'view':  ol.View.new({
+    'projection': 'EPSG:4326',
+    'center': [5.7626, 45.1734],
+    'zoom': 8,
+    'maxResolution': 0.703125
+  })
 })
 </script>
 
