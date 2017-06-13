@@ -84,10 +84,11 @@ De nouveaux objets géographiques peuvent être dessinés en utilisant une `ol.i
 
 Voici une solution pour la première tâche bonus. Dedans, nous assignons un "listener" pour l'événement `drawend` de `ol.interaction.Draw`. Cette méthode enregistre les X et Y de l'objet géographique dans la console des outils de développement du navigateur:
 
-```js
-draw.on('drawend', function(evt){
-  var feature = evt.feature;
-  var p = feature.getGeometry();
-  console.log(p.getCoordinates());
-});
+```python
+def getCoor(evt):
+  feature=evt.feature
+  p = feature.getGeometry();
+  console.log(p.getCoordinates())
+  
+draw.on('drawend', getCoor)
 ```
