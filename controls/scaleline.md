@@ -8,9 +8,9 @@ Un autre widget typique à afficher sur une carte est la barre d'échelle.  Open
 
 1.  Ouvrez `map.html` dans votre éditeur de texte.
 
-2.  Quelque part dans la configuration de la carte, ajoutez le code suivant pour créer un nouveau `control` de barre d'échelle pour votre carte:
+2.  Quelque part dans la configuration de la carte (juste avant `'view':  ol.View.new({ `  par exemple), ajoutez le code suivant pour créer un nouveau `control` de barre d'échelle pour votre carte:
 
-  ```js
+  ```python
     controls: ol.control.defaults().extend([
       new ol.control.ScaleLine()
     ]),
@@ -43,7 +43,7 @@ Cependant, pour l'intérêt de l'exercice, admettons que vous pensez que l'affic
 
 2.  Maintenant, modifiez le code créant le `control` d'échelle afin qu'il se réfère à l'élément `scale-line`:
 
-  ```js
+  ```python
     controls: ol.control.defaults().extend([
       new ol.control.ScaleLine({className: 'ol-scale-line', target: document.getElementById('scale-line')})
     ]),
