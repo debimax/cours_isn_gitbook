@@ -9,81 +9,93 @@ La modification des objets géographiques fonctionne en utilisant une `ol.intera
 1. Commencez avec un exemple qui fonctionne.  Ouvrez `map.html` dans votre éditeur de texte et assurez vous qu'il ressemble à ce qui suit:
 
   ```html
-  <!doctype html>
-  <html lang="en">
-    <head>
-      <link rel="stylesheet" href="/ol.css" type="text/css">
-      <style>
-      #map {
-        height: 256px;
-        width: 512px;
-      }
-      </style>
-      <script src="/loader.js" type="text/javascript"></script>
-      <title>OpenLayers example</title>
-    </head>
-    <body>
-      <h1>My Map</h1>
-      <div id="map"></div>
-      <script type="text/javascript">
-        var source = new ol.source.Vector({
-          url: '/data/layers/7day-M2.5.json',
-          format: new ol.format.GeoJSON()
-        });
-        var style = new ol.style.Style({
-          image: new ol.style.Circle({
-            radius: 7,
-              fill: new ol.style.Fill({
-              color: [0, 153, 255, 1]
-            }),
-            stroke: new ol.style.Stroke({
-              color: [255, 255, 255, 0.75],
-              width: 1.5
-            })
-          }),
-          zIndex: 100000
-        });
-        var select = new ol.interaction.Select({style: style});
-        var modify = new ol.interaction.Modify({
-          features: select.getFeatures()
-        });
-        var map = new ol.Map({
-          interactions: ol.interaction.defaults().extend([select, modify]),
-          target: 'map',
-          layers: [
-            new ol.layer.Tile({
-              title: 'Global Imagery',
-              source: new ol.source.TileWMS({
-                url: 'https://ahocevar.com/geoserver/wms',
-                params: {LAYERS: 'nasa:bluemarble', TILED: true}
-              })
-            }),
-            new ol.layer.Vector({
-              title: 'Earthquakes',
-              source: source,
-              style: new ol.style.Style({
-                image: new ol.style.Circle({
-                  radius: 5,
-                  fill: new ol.style.Fill({
-                    color: '#0000FF'
-                  }),
-                  stroke: new ol.style.Stroke({
-                    color: '#000000'
-                  })
-                })
-              })
-            })
-          ],
-          view: new ol.View({
-            projection: 'EPSG:4326',
-            center: [0, 0],
-            zoom: 1
-          })
-        });
-      </script>
-    </body>
-  </html>
-  ```
+<html>
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>
+<script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
+<style>
+#map {
+height: 400px;
+width: 100%;
+}
+.ol-attribution a {
+color: black;
+}
+</style>
+</head>
+<body onload="brython(1)">
+<div id="map" class ="map"> </div>
+
+<div id="info"></div>
+
+<script type="text/python">
+from browser import window, document
+ol = window.ol
+
+tremblements_terre = ol.layer.Vector.new({
+  'title': 'Earthquakes',
+  'source': ol.source.Vector.new({
+    'url': 'https://raw.githubusercontent.com/boundlessgeo/ol3-workshop/master/src/data/layers/7day-M2.5.json',
+    'format':  ol.format.GeoJSON.new()
+  }),
+  'style':  ol.style.Style.new({
+    'image':  ol.style.Circle.new({
+      'radius': 5,
+      'fill':  ol.style.Fill.new({
+        'color': '#0000FF'
+      }),
+      'stroke':  ol.style.Stroke.new({
+        'color': '#000000'
+      })
+    })
+  })
+})
+
+style =  ol.style.Style.new({
+  'image':  ol.style.Circle.new({
+    'radius': 7,
+    'fill':  ol.style.Fill.new({
+      'color': [0, 153, 255, 1]
+    }),
+    'stroke':  ol.style.Stroke.new({
+      'color': [255, 255, 255, 0.75],
+      'width': 1.5
+    })
+  }),
+  'zIndex': 100000
+});
+
+select =  ol.interaction.Select.new({'style': style});
+
+modify =  ol.interaction.Modify.new({
+  'features': select.getFeatures()
+});
+
+map =  ol.Map.new({
+  'interactions': ol.interaction.defaults().extend([select, modify]),
+  'target': 'map',
+  'layers': [
+     ol.layer.Tile.new({
+       'title': 'Global Imagery',
+       'source':  ol.source.TileWMS.new({
+         'url': 'https://ahocevar.com/geoserver/wms',
+         'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
+       })
+     }),
+    tremblements_terre
+    ],
+    'view':  ol.View.new({
+    'projection': 'EPSG:4326',
+    'center': [5.7626, 45.1734],
+    'zoom': 2
+  })
+})
+</script>
+</body>
+</html>
+    ```
 
 2.  Sauvez vos changements de `map.html` et ouvrez la page dans votre navigateur:  {{ book.workshopUrl }}/map.html. Pour voir la modification des objets géographiques en action, utilisez le clic souris pour sélectionner un tremblement de terre et ensuite bougez pour déplacer le point.
 
@@ -91,24 +103,26 @@ La modification des objets géographiques fonctionne en utilisant une `ol.intera
 
 Examinons comment la modification des objets géographiques fonctionne.
 
-```js
-  var style = new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 7,
-        fill: new ol.style.Fill({
-        color: [0, 153, 255, 1]
-      }),
-      stroke: new ol.style.Stroke({
-        color: [255, 255, 255, 0.75],
-        width: 1.5
-      })
+```python
+style =  ol.style.Style.new({
+  'image':  ol.style.Circle.new({
+    'radius': 7,
+    'fill':  ol.style.Fill.new({
+      'color': [0, 153, 255, 1]
     }),
-    zIndex: 100000
-  });
-  var select = new ol.interaction.Select({style: style});
-  var modify = new ol.interaction.Modify({
-    features: select.getFeatures()
-  });
+    'stroke':  ol.style.Stroke.new({
+      'color': [255, 255, 255, 0.75],
+      'width': 1.5
+    })
+  }),
+  'zIndex': 100000
+});
+
+select =  ol.interaction.Select.new({'style': style});
+
+modify =  ol.interaction.Modify.new({
+  'features': select.getFeatures()
+});
 ```
 
 Nous créons 2 interactions, une `ol.interaction.Select` pour sélectionner les objets géographiques avant de les modifier, et une `ol.interaction.Modify` pour modifier réellement les géométries. Elles partagent la même `ol.Collection` d'objets géographiques. Les objets géographiques sélectionnés en utilisant `ol.interaction.Modify` deviennent candidats à la modification avec `ol.interaction.Modify`. Comme précédemment, `ol.interaction.Select` est configurée avec une objet `style`, qui définit effectivement le style utilisé pour dessiner les objets géographiques sélectionnés. Quand un utilisateur clique sur la carte à nouveau, l'objet géographique est dessiné en utilisant le style de la couche.
