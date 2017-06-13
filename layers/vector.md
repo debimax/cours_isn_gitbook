@@ -44,52 +44,8 @@ map =  ol.Map.new({
   ],
   'view':  ol.View.new({
     'projection': 'EPSG:4326',
-    'center': [0, 0],
-    'zoom': 0,
-    'maxResolution': 0.703125
-})
-})
-</script>
-</body>
-</html><html>
-<head>
-<meta charset="utf-8" />
-<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>
-<script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
-<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
-<style>
-
-#map {
-height: 400px;
-width: 100%;
-}
-.ol-attribution a {
-color: black;
-}
-</style>
-</head>
-<body onload="brython(1)">
-<div id="map" class ="map"> </div>
-
-<script type="text/python">
-from browser import window
-ol = window.ol
-
-map =  ol.Map.new({
-  'target': 'map',
-  'layers': [
-    ol.layer.Tile.new({
-      'title': 'Global Imagery',
-      'source':  ol.source.TileWMS.new({
-        'url': 'https://ahocevar.com/geoserver/wms',
-        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
-      })
-    })
-  ],
-  'view':  ol.View.new({
-    'projection': 'EPSG:4326',
-    'center': [0, 0],
-    'zoom': 0,
+    'center': [5.7626, 45.1734],
+    'zoom': 1,
     'maxResolution': 0.703125
 })
 })
@@ -144,14 +100,16 @@ Comme solution à la première tâche bonus, vous pouvez ajouter une div `info` 
 <div id="info"></div>
 ```
 
-et ajouter le code JavaScript suivant pour afficher le titre de l'objet cliqué:
+et ajouter le code pyython suivant pour afficher le titre de l'objet cliqué:
 
-```js
-map.on('singleclick', function(e) {
-  var feature = map.forEachFeatureAtPixel(e.pixel, function(feature) {
-    return feature;
-  });
-  var infoElement = document.getElementById('info');
-  infoElement.innerHTML = feature ? feature.get('title') : '';
-});
+```python
+def get_feature(e):  
+    ft = map.forEachFeatureAtPixel(e.pixel, lambda feature, layer: feature)  
+    info_element = document['info']  
+    #info_element.text = ft.getKeys()  
+    try:  
+        info_element.text = ft.get('title')  
+    except:  
+        pass  
+map.on('singleclick', get_feature)
 ```
