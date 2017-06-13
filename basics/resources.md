@@ -12,10 +12,11 @@ Les examples sont écrits en javascript,  il faudra soit les transformer pour br
 
 ## Convertir  un exemple openlayer de javascript pour brython
 
-* Ajouter juste après la balise &lt;script&gt; from 
-  `browser import window`
+* Ajouter juste après la balise &lt;script&gt; 
+  from `browser import window`
   `ol = window.ol`
-* Enlever `var`
+
+* Enlever le mot `var`
 * `new` se met à la fin
   Par exemple on transforme `var map = new ol.Map({` en  `map = ol.Map.new({`  
 * On met en type  string  pour les dictionnaires.

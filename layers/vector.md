@@ -7,43 +7,94 @@ Les couches vecteur sont représentées par `ol.layer.Vector` et gère l'afficha
 Revenons à l'exemple WMS pour avoir une carte du monde basique.  Nous allons ajouter quelques données géographiques au dessus, dans une couche vecteur.
 
 ```html
-<!doctype html>
-<html lang="en">
-  <head>
-    <link rel="stylesheet" href="/ol.css" type="text/css">
-    <style>
-      #map {
-        height: 256px;
-        width: 512px;
-      }
-    </style>
-    <title>OpenLayers example</title>
-    <script src="/loader.js" type="text/javascript"></script>
-  </head>
-  <body>
-    <h1>My Map</h1>
-    <div id="map"></div>
-    <script type="text/javascript">
-      var map = new ol.Map({
-        target: 'map',
-        layers: [
-          new ol.layer.Tile({
-            title: 'Global Imagery',
-            source: new ol.source.TileWMS({
-              url: 'https://ahocevar.com/geoserver/wms',
-              params: {LAYERS: 'nasa:bluemarble', TILED: true}
-            })
-          })
-        ],
-        view: new ol.View({
-          projection: 'EPSG:4326',
-          center: [0, 0],
-          zoom: 0,
-          maxResolution: 0.703125
-        })
-      });
-    </script>
-  </body>
+<html>
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>
+<script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
+<style>
+
+#map {
+height: 400px;
+width: 100%;
+}
+.ol-attribution a {
+color: black;
+}
+</style>
+</head>
+<body onload="brython(1)">
+<div id="map" class ="map"> </div>
+
+<script type="text/python">
+from browser import window
+ol = window.ol
+
+map =  ol.Map.new({
+  'target': 'map',
+  'layers': [
+    ol.layer.Tile.new({
+      'title': 'Global Imagery',
+      'source':  ol.source.TileWMS.new({
+        'url': 'https://ahocevar.com/geoserver/wms',
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
+      })
+    })
+  ],
+  'view':  ol.View.new({
+    'projection': 'EPSG:4326',
+    'center': [0, 0],
+    'zoom': 0,
+    'maxResolution': 0.703125
+})
+})
+</script>
+</body>
+</html><html>
+<head>
+<meta charset="utf-8" />
+<script type="text/javascript" src="https://www.brython.info/src/brython.js"></script>
+<script type="text/javascript" src="https://openlayers.org/en/v4.1.1/build/ol.js"></script>
+<link rel="stylesheet" type="text/css" href="https://openlayers.org/en/v4.1.1/css/ol.css">
+<style>
+
+#map {
+height: 400px;
+width: 100%;
+}
+.ol-attribution a {
+color: black;
+}
+</style>
+</head>
+<body onload="brython(1)">
+<div id="map" class ="map"> </div>
+
+<script type="text/python">
+from browser import window
+ol = window.ol
+
+map =  ol.Map.new({
+  'target': 'map',
+  'layers': [
+    ol.layer.Tile.new({
+      'title': 'Global Imagery',
+      'source':  ol.source.TileWMS.new({
+        'url': 'https://ahocevar.com/geoserver/wms',
+        'params': {'LAYERS': 'nasa:bluemarble', 'TILED': True}
+      })
+    })
+  ],
+  'view':  ol.View.new({
+    'projection': 'EPSG:4326',
+    'center': [0, 0],
+    'zoom': 0,
+    'maxResolution': 0.703125
+})
+})
+</script>
+</body>
 </html>
 ```
 
@@ -51,22 +102,22 @@ Revenons à l'exemple WMS pour avoir une carte du monde basique.  Nous allons aj
 
 1. Ouvrez `map.html` dans votre éditeur de texte et copiez dedans le contenu de votre exemple WMS initial. Sauvez vos changements et confirmez que les choses fonctionnent bien dans votre navigateur: {{ book.workshopUrl }}/map.html
 
-2. Dans votre code d'initialisation de la carte, ajoutez une autre couche après la couche tuilée (collez ce qui suit). Cela ajoute une nouvelle couche vecteur à votre carte qui demande un jeu d'objets géographiques sous format GeoJSON:
+2. Dans votre code d'initialisation de la carte, ajoutez une autre couche après la couche tuilée (collez ce qui suit juste avant `],` ). Cela ajoute une nouvelle couche vecteur à votre carte qui demande un jeu d'objets géographiques sous format GeoJSON:
 
-  ```js
-    new ol.layer.Vector({
-      title: 'Earthquakes',
-      source: new ol.source.Vector({
-        url: '/data/layers/7day-M2.5.json',
-        format: new ol.format.GeoJSON()
+  ```python
+    ol.layer.Vector.new({
+      'title': 'Earthquakes',
+      'source':  ol.source.Vector.new({
+        'url': '7day-M2.5.json',
+        'format':  ol.format.GeoJSON.new()
       }),
-      style: new ol.style.Style({
-        image: new ol.style.Circle({
-          radius: 3,
-          fill: new ol.style.Fill({color: 'white'})
+      'style':  ol.style.Style.new({
+        'image':  ol.style.Circle.new({
+          'radius': 3,
+          'fill':  ol.style.Fill.new({'color': 'white'})
         })
-      })
-    })
+     })
+  })
   ```
 
   ![Emplacements de tremblements de terre](vector1.png)
@@ -74,22 +125,6 @@ Revenons à l'exemple WMS pour avoir une carte du monde basique.  Nous allons aj
 ### Revue de détails
 
 Examinons la création de cette couche vecteur pour se faire une idée de ce qu'il se passe.
-
-```js
-new ol.layer.Vector({
-  title: 'Earthquakes',
-  source: new ol.source.Vector({
-    url: '/data/layers/7day-M2.5.json',
-    format: new ol.format.GeoJSON()
-  }),
-  style: new ol.style.Style({
-    image: new ol.style.Circle({
-      radius: 3,
-      fill: new ol.style.Fill({color: 'white'})
-    })
-  })
-})
-```
 
 La couche se voit donner le titre (`title`) `'Earthquakes'` et quelques options personnalisées. Dans les options de l'objet, nous avons inclus une `source` de type `ol.source.Vector` qui pointe vers une URL. Nous avons donné à la `source` un `format` qui sera utilisé pour parser les données.
 
