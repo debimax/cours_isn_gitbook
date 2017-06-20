@@ -6,5 +6,5 @@
   * Listes, chaines et tuples
 * [Internet](Internet)
   * HTML et Brython
-  * Flask
+  * [Flask](Internet/flask.md)
 
