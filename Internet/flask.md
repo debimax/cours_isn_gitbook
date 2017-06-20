@@ -158,7 +158,7 @@ timer = timer.set_interval(getClock,1000)
 </script>
 ```
 
-# Accéder aux éléments de la page
+## Accéder aux éléments de la page
 
 
 
@@ -198,7 +198,7 @@ document.get(selector='a[title]')   # balises A avec un attribut "title"
 ```
 
 
-# Attributs et méthodes des éléments
+## Attributs et méthodes des éléments
 
 Les éléments de la page possèdent des attributs et des méthodes qui dépendent du type de l'objet ;  
 On peut les trouver sur de nombreux [sites Internet](https://developer.mozilla.org/fr/docs/Web/HTML/Attributs).
@@ -223,14 +223,14 @@ L/E = lecture + écriture</th></tr>
 <tr><td> width </td><td> entier </td><td> largeur de l'élément en pixels (2) </td><td> L/E </td></tr>
 </table>
 
-# Les évènements
+## Les évènements
 
 - Un ***événement (event***) est la survenue d’une action (clavier, souris) dont votre application a besoin d’être informée.
 - Un ***gestionnaire d'événement (event handler)*** est une fonction de votre application qui a vocation a être appelée lorsqu’un certain événement se produira.
 
-## Evénements souris
+### Evénements souris
 
-### Les événements  relatifs à la souris
+#### Les événements  relatifs à la souris
 
 <table  style="font-size: small">
 <tr><th> évènement</th><th></th>  </tr>
@@ -245,7 +245,7 @@ L/E = lecture + écriture</th></tr>
 <tr><td> dblclick </td> <td> double clic </td></tr>
 </table>
 
-### Attributs de l'objet DOMEvent
+#### Attributs de l'objet DOMEvent
 
 Pour les événements souris, l'instance de DOMEvent possède les attributs suivants
 
@@ -261,9 +261,9 @@ Pour les événements souris, l'instance de DOMEvent possède les attributs suiv
 <tr><td> screenY </td><td> comme y </td><tr>
 </table>
 
-## Evénements clavier
+### Evénements clavier
 
-### Les événements relatifs au clavier
+#### Les événements relatifs au clavier
 
 <table  style="font-size: small">
 <tr><th>évènement</th><th></th></tr>
@@ -273,7 +273,7 @@ Pour les événements souris, l'instance de DOMEvent possède les attributs suiv
 <tr><td> keyup </td><td> relâchement d'une touche enfoncée</td></tr>
 </table>
 
-###  Attributs de l'objet DOMEvent
+####  Attributs de l'objet DOMEvent
 
 L'instance de ***DOMEvent*** possède les attributs suivants
 
@@ -298,7 +298,7 @@ Cet attribut n'est utilisable que pour l'événement keypress</td><tr>
     noter que le résultat n'est pas le même selon qu'on gère les événements *keydown, keyup* et *keypress* </td><tr>
 </table>
  
-## Les événement focus:
+### Les événement focus:
 
 <table style="font-size: small">
 <tr><td>***blur***</td><td>un élément a perdu le focus</td></tr>
@@ -308,11 +308,9 @@ Cet attribut n'est utilisable que pour l'événement keypress</td><tr>
 
 Il existe aussi l'événement ***[glisser-déposer](https://www.brython.info/static_doc/fr/drag_events.html)***
 
-# Exercices
+## Exercices
 
-
-
-## Calculer votre IMC
+### Calculer votre IMC
 
 Nous traiterons des échanges client serveur dans une prochaine leçon avec flask pour programmer en python coté serveur.
 
@@ -349,7 +347,7 @@ document["calculer"].bind("click", calculImc)
 </body>
 </html>
 
-## Afficher les dimensions de l'ecran
+### Afficher les dimensions de l'ecran
 
 Créer une page html qui affiche les dimensions de l'ecran.
 
@@ -384,6 +382,3 @@ timer = timer.set_interval(getClock,1000)
   </script>
   <div id="zone"><div id='date'></div></div>
   <script type="text/javascript">brython({debug:1, static_stdlib_import: false, ipy_id: ["874923"]});</script>
-
-
-
