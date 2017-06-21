@@ -1,10 +1,10 @@
 # Summary
 
 * [Introduction](README.md)
-* [First Chapter](chapter1.md)
-  * Les bases
-  * Listes, chaines et tuples
+* [Les bases de python](chapter1.md)
+  * [Les bases](chapter1/les-bases.md)
+  * [Listes, chaines et tuples](chapter1/listes-chaines-et-tuples.md)
 * [Internet](Internet)
-  * HTML et Brython
+  * [HTML et Brython](Internet/html-et-brython.md)
   * [Flask](Internet/flask.md)
 
