@@ -1,4 +1,0 @@
-# Les bases de python 
-
-
-
